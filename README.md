@@ -3,4 +3,4 @@
 React App Made with ![image](https://github.com/user-attachments/assets/111ecdbb-52b9-400e-9902-0b049366f0b5)
 
 Affan Ahmed Ghouri also known as   Notjerry 
-An  OpenSource Contributor & Frontend Developer 
+An  OpenSource Contributor
