@@ -5,8 +5,8 @@ const state = proxy({
   color: '#EFBD48',
   isLogoTexture: true,
   isFullTexture: false,
-  logoDecal: '/T-Shirt-Customizer/threejs.png',
-  fullDecal: '/T-Shirt-Customizer/threejs.png',
+  logoDecal: 'threejs.png',
+  fullDecal: 'threejs.png',
   isAIEnabled: false,
 });
 
