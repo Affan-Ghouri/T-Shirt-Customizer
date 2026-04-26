@@ -1,35 +1,11 @@
-import React, { useRef } from 'react'
-import { useFrame } from '@react-three/fiber'
-import { AccumulativeShadows, RandomizedLight } from '@react-three/drei';
+import React from 'react'
 
 const Backdrop = () => {
-  const shadows = useRef();
-
   return (
-    <AccumulativeShadows
-      ref={shadows}
-      temporal
-      frames={60}
-      alphaTest={0.85}
-      scale={0.5}
-      rotation={[Math.PI / 2, 0, 0]}
-      position={[0, 0, -0.14]}
-    >
-      <RandomizedLight 
-        amount={9}
-        radius={5}
-        intensity={0.55}
-        ambient={0.5}
-        position={[5, 5, -10]}
-      />
-      <RandomizedLight 
-        amount={4}
-        radius={5}
-        intensity={0.25}
-        ambient={0.55}
-        position={[-5, 5, -9]}
-      />
-    </AccumulativeShadows>
+    <mesh position={[0, 0, -0.5]} receiveShadow>
+      <planeGeometry args={[10, 10]} />
+      <meshStandardMaterial color="#ffffff" transparent opacity={0} />
+    </mesh>
   )
 }
 
