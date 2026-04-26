@@ -3,15 +3,20 @@ import { easing } from 'maath';
 import { useSnapshot } from 'valtio';
 import { useFrame } from '@react-three/fiber';
 import { Decal, useGLTF, useTexture } from '@react-three/drei';
+import { useEffect, useState } from 'react';
 
 import state from '../store';
 
+const MODEL_URL = '/T-Shirt-Customizer/shirt_baked.glb';
+const TEXTURE_URL = '/T-Shirt-Customizer/threejs.png';
+
 function Shirt() {
   const snap = useSnapshot(state);
+  const [modelLoaded, setModelLoaded] = useState(false);
   
-  const { nodes, materials } = useGLTF('/T-Shirt-Customizer/shirt_baked.glb');
-  const logoTexture = useTexture(snap.logoDecal);
-  const fullTexture = useTexture(snap.fullDecal);
+  const { nodes, materials } = useGLTF(MODEL_URL, () => setModelLoaded(true));
+  const logoTexture = useTexture(TEXTURE_URL);
+  const fullTexture = useTexture(TEXTURE_URL);
 
   useFrame((state, delta) => {
     if (materials.lambert1) {
