@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { easing } from 'maath';
 import { useSnapshot } from 'valtio';
 import { useFrame } from '@react-three/fiber';
@@ -8,14 +8,20 @@ import state from '../store';
 
 const Shirt = () => {
   const snap = useSnapshot(state);
+  const [isLoading, setIsLoading] = useState(true);
+  
   const { nodes, materials } = useGLTF('/shirt_baked.glb');
 
-  const logoTexture = useTexture(snap.logoDecal);
+  const logoTexture = useTexture(snap.logoDecal, () => setIsLoading(false));
   const fullTexture = useTexture(snap.fullDecal);
 
   useFrame((state, delta) => easing.dampC(materials.lambert1.color, snap.color, 0.25, delta));
 
   const stateString = JSON.stringify(snap);
+
+  if (isLoading) {
+    return null;
+  }
 
   return (
     <group key={stateString}>
@@ -32,7 +38,6 @@ const Shirt = () => {
             rotation={[0, 0, 0]}
             scale={1}
             map={fullTexture}
-           
           />
         )}
 
@@ -42,7 +47,6 @@ const Shirt = () => {
             rotation={[0, 0, 0]}
             scale={0.15}
             map={logoTexture}
-            Anisotropy={16}
             depthTest={false}
             depthWrite={true}
           />
